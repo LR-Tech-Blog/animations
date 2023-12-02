@@ -1,0 +1,6 @@
+export const bgColor = "#232634"
+export const surfaceColor = "#414559"
+export const mantleColor = "#1e2030"
+export const yellowColor = "#e5c890"
+export const lavanderColor = "#babbf1"
+export const fontColor = "#c6d0f5"
