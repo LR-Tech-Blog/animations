@@ -14,7 +14,7 @@ import {
   waitUntil,
   easeInOutQuart,
 } from "@motion-canvas/core";
-import { surfaceColor, bgColor, yellowColor, fontColor as textColor, mantleColor } from "../theme/colors";
+import { surfaceColor, bgColor, yellowColor, fontColor as textColor, mantleColor, fontColor } from "../theme/colors";
 
 export default makeScene2D(function* (view) {
   const pageElements: Rect[] = []
@@ -76,7 +76,7 @@ export default makeScene2D(function* (view) {
           <Rect ref={makeRef(pageElements, 3)} grow={2} fill={bgColor} radius={7} />
         </Layout>
       </Rect>
-      <Txt ref={elementInteractive} fontFamily={"Poppins"} fill={textColor} fontSize={30}
+      <Txt ref={elementInteractive} fontFamily={"Poppins"} fill={fontColor} fontSize={30}
       x={320} y={-200} opacity={pageElements[0].opacity}>
         NÃO INTERATIVO
       </Txt>
@@ -113,7 +113,6 @@ export default makeScene2D(function* (view) {
     clientDirective().x(-530, 0).to(110, 1),
     clientDirective().y(-350, 0).to(-270, 1)
   )
-  yield clientDirective().opacity(1, 0).to(0, 0)
   yield* tween(0.5, (value) => {
     pageWrapper().position.x(map(400, 0, easeOutCubic(value)));
   })
@@ -122,6 +121,7 @@ export default makeScene2D(function* (view) {
     ...pageElements.map(rec => rec.scale(1, 0).to(0.98, 0.3)),
   )
   yield* all(
+    clientDirective().opacity(1, 0).to(0, 0),
     loading().opacity(1, 0.3),
     headerComponent().edit(0)`<Header ${insert("client:load")}/>`,
     chain(
@@ -142,6 +142,7 @@ export default makeScene2D(function* (view) {
           }),
           elementInteractive().text("NÃO INTERATIVO", 0).to("INTERATIVO", 0.3),
           elementInteractive().x(320, 0).to(350, 0.3),
+          elementInteractive().fill(textColor, 0).to(yellowColor, 0.3)
         ),
         ...pageElements.map(rec => rec.scale(0.98, 0).to(1, 0.3)),
       ),
