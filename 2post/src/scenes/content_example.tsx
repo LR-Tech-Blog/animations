@@ -232,7 +232,12 @@ export default makeScene2D(function* (view) {
       x={1600}
       direction={"column"}
     >
-      <Rect fill={mantleColor} grow={1} radius={12} />
+      <Rect fill={mantleColor} grow={1} radius={12}
+      justifyContent={"start"} alignItems={"center"} paddingLeft={15}>
+        <Txt fontFamily={"Poppins"}
+          fill={fontColor}
+          fontSize={40}>Blog</Txt>
+      </Rect>
       <Rect
         fill={mantleColor}
         grow={2}
@@ -241,14 +246,19 @@ export default makeScene2D(function* (view) {
       >
         <Rect
         ref={browserContentBody}
-        layout
         direction={"column"}
-        gap={10}
         width={1100}
         opacity={0}
         scale={0.9}
         >
-        <Img src={helloWorldImage} height={450} radius={12} />
+          <Rect 
+          height={450}
+          radius={12}
+          justifyContent={"center"}
+          clip
+          >
+        <Img src={helloWorldImage} scale={2} />
+          </Rect>
         <Txt
           ref={browserContentText}
           fontFamily={"Poppins"}
