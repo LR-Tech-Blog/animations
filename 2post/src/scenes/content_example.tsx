@@ -26,7 +26,7 @@ import {
   waitFor,
   waitUntil,
 } from "@motion-canvas/core";
-import File from "./components/File";
+import File from "../components/File";
 import {
   fontColor,
   lavanderColor,

@@ -1,5 +1,5 @@
 import { Rect, RectProps, SVG, Txt } from "@motion-canvas/2d/lib/components";
-import { surfaceColor, bgColor, fontColor } from "../../theme/colors";
+import { surfaceColor, bgColor, fontColor } from "../theme/colors";
 import { CodeBlock } from "@motion-canvas/2d/lib/components/CodeBlock";
 
 interface FileProps extends RectProps {
