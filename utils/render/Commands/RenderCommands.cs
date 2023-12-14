@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Render.Commands.Settings;
+using Render.Exceptions;
 using Render.Models;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -8,16 +9,24 @@ namespace Render.Commands;
 
 public sealed class RenderCommands : Command<RenderCommandSettings>
 {
-    private RenderSettings _renderSettings { get; set; }
+    private RenderSettings? renderSettings { get; set; }
     
     public override int Execute(CommandContext context, RenderCommandSettings settings)
     {
-        RenderSettings? renderSettings = ReadSettings(settings.settings);
-        if(renderSettings is null)
-            return 1;
+        RenderSettings? settingsFromFile = ReadSettings(settings.settings);
+        if(settingsFromFile is null)
+            return 2;
         
-        _renderSettings = renderSettings;
-        AnsiConsole.MarkupLine("Render command is not implemented yet.");
+        renderSettings = settingsFromFile;
+
+        try
+        {
+            CheckBinariesInPath();
+        }
+        catch (InvalidSettingsFileFormatException) { return 3; }
+        catch (Exception) { return 1; }
+        
+        
         
         return 0;
     }
@@ -45,9 +54,46 @@ public sealed class RenderCommands : Command<RenderCommandSettings>
         RenderSettings? settings = JsonSerializer.Deserialize<RenderSettings>(json);
         if (settings is not null) return settings;
         
-        Exception exception = new("Settings file is invalid.");
-        AnsiConsole.WriteException(exception, ExceptionFormats.ShortenEverything);
+        InvalidSettingsFileFormatException exception = new();
+        AnsiConsole.WriteException(exception);
         return null;
+        
+    }
 
+    private void CheckBinariesInPath()
+    {
+        if(renderSettings is null)
+            return;
+        
+        if (!renderSettings.useFfmpegFromEnv)
+        {
+            bool existsFfmpegBinary = File.Exists(renderSettings.ffmpegPath);
+            if (!existsFfmpegBinary)
+            {
+                BinaryNotFoundException exception = new("FFmpeg", renderSettings.ffmpegPath);
+                AnsiConsole.WriteException(exception);
+                throw exception;
+            }
+        }
+
+        if (!renderSettings.useGifskiFromEnv)
+        {
+            bool existsGifskiBinary = File.Exists(renderSettings.gifskiPath);
+            if (!existsGifskiBinary)
+            {
+                BinaryNotFoundException exception = new("Gifski", renderSettings.gifskiPath);
+                AnsiConsole.WriteException(exception);
+                throw exception;
+            }
+        }
+    }
+
+    private IEnumerable<string> GetScenesDirectories(string projectPath, IEnumerable<string>? scenesName)
+    {
+        IEnumerable<string> scenesDir = Directory.GetDirectories(projectPath);
+        if (scenesName is not null)
+            scenesDir = scenesDir.Where(scenesName.Contains);
+        
+        return scenesDir;
     }
 }

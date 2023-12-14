@@ -29,7 +29,7 @@ public sealed class AppCommands : Command<AppCommandSettings>
     private void GenerateSettingsTemplate()
     {
         AnsiConsole.Status()
-            .Start("Generating settings template...", async (ctx) =>
+            .Start("Generating settings template...", async _ =>
             {
                 await using StreamWriter file = File.CreateText("./settings.json");
                 await file.WriteAsync(Templates.SETTIGNS_TEMPLATE);
