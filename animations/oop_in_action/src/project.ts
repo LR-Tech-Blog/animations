@@ -1,9 +1,9 @@
 import {makeProject} from '@motion-canvas/core';
 
-import example from './scenes/example?scene';
+import class_object from './scenes/class_object?scene';
 
 export default makeProject({
-  scenes: [example],
+  scenes: [class_object],
   variables: {
     "darkMode": false,
   }

@@ -4,8 +4,8 @@ import {
   insert,
   remove,
 } from "@motion-canvas/2d/lib/components/CodeBlock";
-import { circleJavaClass } from "./code_conts";
-import { getColorTheme } from "../styles";
+import { circleJavaClass } from "../code";
+import { getColorTheme } from "../shared/styles";
 import {
   DEFAULT,
   ThreadGenerator,
@@ -30,7 +30,7 @@ import {
 import objectDemoLight from "../../videos/object_demo_light.mp4";
 import objectDemoDark from "../../videos/object_demo_dark.mp4";
 
-import { popUp, pulseStroke } from "../reanimations";
+import { popUp, pulseStroke } from "../shared/reanimations";
 
 export default makeScene2D(function* (view) {
   const theme = useScene().variables.get<boolean>("darkMode", false);
