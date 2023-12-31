@@ -1,0 +1,19 @@
+name: physics_scene_engine
+description: "The project used to record takes thats envolves physics."
+
+publish_to: "none"
+
+version: 1.0.0
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  flame: ^1.13.1
+  flame_forge2d: ^0.16.0+3
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
