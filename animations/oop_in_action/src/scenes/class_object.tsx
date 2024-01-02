@@ -240,7 +240,7 @@ export default makeScene2D(function* (view) {
   );
 
   yield* all(
-    loop(10, () => pulseBoth(instantiationRectRef(), objectDemoRef())),
+    loop(13, () => pulseBoth(instantiationRectRef(), objectDemoRef())),
     tween(0.5, (value) =>
       instantiationRectRef().y(map(0, -300, easeInOutCubic(value)))
     ),
@@ -268,7 +268,7 @@ ${remove("public int ")}possitionY;
 color${insert(' = "blue"')};
 radius${insert(" = 3")};
 possitionX${insert(" = randomX")};
-possitionY${insert(" = randomY")};`,
+possitionY${insert(" = -100")};`,
       codeRef().selection(DEFAULT, 0.3),
       all(
         atributeTextRef().opacity(0, 0).to(1, 0),

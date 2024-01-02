@@ -65,7 +65,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
         scale={0}
       >
-        Titulo
+        Título
       </Txt>
 
       <Txt
