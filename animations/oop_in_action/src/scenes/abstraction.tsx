@@ -212,14 +212,19 @@ export default makeScene2D(function* (view) {
     )
   );
 
-  yield* sequence(0.4,
+  yield* sequence(
+    0.4,
     tween(1, (value) => atributesListRef().y(map(0, 1000, easeInCubic(value)))),
     all(
-        tween(1, (value) => exapleCodeRef().x(map(510, 300, easeInOutCubic(value)))),
-        exapleCodeRef().fontSize(48, 0).to(60, 1),
-        tween(1, (value) => bookSvgRef().x(map(-730, -450, easeInOutCubic(value))))
+      tween(1, (value) =>
+        exapleCodeRef().x(map(510, 300, easeInOutCubic(value)))
+      ),
+      exapleCodeRef().fontSize(48, 0).to(60, 1),
+      tween(1, (value) =>
+        bookSvgRef().x(map(-730, -450, easeInOutCubic(value)))
       )
-  )
-  
+    )
+  );
+
   yield* waitFor(2);
 });

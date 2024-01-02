@@ -14,12 +14,10 @@ import {
   easeInOutCubic,
   easeOutCubic,
   map,
-  range,
   sequence,
   tween,
   useScene,
   waitFor,
-  waitUntil,
 } from "@motion-canvas/core";
 import { getColorTheme } from "../shared/styles";
 import { CodeBlock, lines } from "@motion-canvas/2d/lib/components/CodeBlock";

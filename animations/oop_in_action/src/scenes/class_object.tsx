@@ -1,4 +1,4 @@
-import { Circle, Img, Rect, Txt, Video, makeScene2D } from "@motion-canvas/2d";
+import { Circle, Rect, Txt, Video, makeScene2D } from "@motion-canvas/2d";
 import {
   CodeBlock,
   insert,
@@ -8,24 +8,19 @@ import { circleJavaClass } from "../code";
 import { getColorTheme } from "../shared/styles";
 import {
   DEFAULT,
-  ThreadGenerator,
   all,
   createRef,
   createSignal,
   easeInCubic,
   easeInOutCubic,
-  easeInQuad,
   easeOutCubic,
   easeOutQuart,
   loop,
-  makeRef,
   map,
-  range,
   sequence,
   tween,
   useScene,
   waitFor,
-  waitUntil,
 } from "@motion-canvas/core";
 import objectDemoLight from "../../videos/object_demo_light.mp4";
 import objectDemoDark from "../../videos/object_demo_dark.mp4";
@@ -256,23 +251,25 @@ export default makeScene2D(function* (view) {
     sequence(
       0.5,
       codeRef().edit(0.4)`${remove("public class Circle {")}
-      ${remove("public String ")}color;
-      ${remove("public int ")}radius;
-      ${remove("public int ")}possitionX;
-      ${remove("public int ")}possitionY;
+${remove("public String ")}color;
+${remove("public int ")}radius;
+${remove("public int ")}possitionX;
+${remove("public int ")}possitionY;
   ${remove("}")}`,
       all(
         tween(0.5, (value) =>
           codeRectRef().width(map(0, 650, easeOutCubic(value)))
         ),
-        tween(0.5, (value) => codeRectRef().height(map(0, 300, easeOutCubic(value))))
+        tween(0.5, (value) =>
+          codeRectRef().height(map(0, 300, easeOutCubic(value)))
+        )
       ),
       codeRef().edit(0.4)`
-  color${insert(' = "blue"')};
-  radius${insert(" = 3")};
-  possitionX${insert(" = randomX")};
-  possitionY${insert(" = randomY")};`,
-  codeRef().selection(DEFAULT, 0.3),
+color${insert(' = "blue"')};
+radius${insert(" = 3")};
+possitionX${insert(" = randomX")};
+possitionY${insert(" = randomY")};`,
+      codeRef().selection(DEFAULT, 0.3),
       all(
         atributeTextRef().opacity(0, 0).to(1, 0),
         tween(0.5, (value) =>
