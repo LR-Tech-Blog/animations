@@ -1,11 +1,16 @@
 {
-  "name": "blog_sweet_blog",
+  "name": "animations",
+  "version": "1.0.0",
+  "description": "The animations monorepo",
   "private": true,
-  "version": "0.0.0",
+  "packageManager": "npm@10.4.0",
   "scripts": {
-    "serve": "vite",
-    "build": "tsc && vite build"
+    "serve": "turbo run serve --parallel",
+    "build": "turbo run build"
   },
+  "workspaces": [
+    "packages/*" 
+  ],
   "dependencies": {
     "@motion-canvas/core": "^3.11.0",
     "@motion-canvas/2d": "^3.11.0",
@@ -16,5 +21,7 @@
     "@motion-canvas/vite-plugin": "^3.11.0",
     "typescript": "^4.9.5",
     "vite": "^4.1.4"
-  }
+  },
+  "author": "LuanRoger",
+  "license": "MIT"
 }
