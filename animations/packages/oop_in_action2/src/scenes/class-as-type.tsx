@@ -189,7 +189,7 @@ export default makeScene2D(function* (view) {
 
   yield* all(
     tween(1, (value) =>
-      galinhaClassDeclarationRef().y(map(0, -600, easeInCubic(value)))
+      galinhaClassDeclarationRef().y(map(0, -900, easeInCubic(value)))
     ),
     galinhaClassDeclarationCodeRef().selection(DEFAULT, 1),
     tween(1.2, (value) =>
